@@ -1,0 +1,58 @@
+# alertListWindRose.R
+require(foreign)
+require(ggplot2)
+require(RColorBrewer)
+require(reshape)
+require(reshape2)
+
+# custom colours
+colours <- c("#eca615", "#7accc8")
+
+# load data manually
+alertdf.test <- data.frame(variable = c("Effectiveness", "Legitimacy"), 
+                        #COPY PLACENAME FROM HERE
+                           Watsontown = c(3.89,3.32),
+                           FortWayne = c(3.32,2.96),
+                           Burlington = c(2.81,3.21),
+                           Toledo = c(3.28,2.67),
+                           Arlington = c(2.29,3.2),
+                           ChevyChase = c(1.52,3.85),
+                           Marshfield = c(3.05,2.14),
+                           Dayton = c(1.67,3.32),
+                           Dearborn = c(3.02,1.83),
+                           Allentown = c(2.09,2.52),
+                           Concord = c(1.46,3.11),
+                           Northampton = c(2.34,2.15),
+                           Rockville = c(1.03,3.45),
+                           Philadelphia = c(3.04,1.34),
+                           Barrington = c(2.48,1.89),
+                           FloralPark = c(2.39,1.96),
+                           Buffalo = c(1.91,2.33),
+                           Gloucester = c(2.99,1.13),
+                           Meadville = c(2.59,1.53),
+                           Lowell = c(2.04,2.05),
+                           DistrictHeights = c(2.43,1.48),
+                           NewYorkCity = c(2.43,1.48),
+                           Albuquerque = c(2.43,1.45),
+                           Rochester = c(3.23,0.5),
+                           PicoRivera = c(1.85,1.81)
+                           
+)
+
+# plot data on coxcomb chart
+plot<- ggplot(alertdf.test, aes(factor(variable), 
+                              # PASTE PLACENAME HERE
+                                Northampton, fill = factor(variable))) + 
+  
+  geom_bar(width = 1, stat = "identity") + 
+  scale_y_continuous(limits=c(0,4), breaks=c(1,2,3,4)) + coord_polar() + 
+  scale_fill_manual(values=colours) +
+  labs(x = "", y = "") + 
+  theme_bw() +
+  theme(legend.position = "right",
+        axis.text.x = element_blank(), 
+        axis.text.y = element_blank(), 
+        axis.ticks = element_blank(),
+        plot.background = element_rect(fill='white',)
+        )
+plot
