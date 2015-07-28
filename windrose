@@ -5,10 +5,16 @@ require(RColorBrewer)
 require(reshape)
 require(reshape2)
 
-# custom colours
+# This is shown with only two variables, but it could easily be expanded to use more variables. Lines starting with a single 
+# "#" explains what the subsequent code is doing, which lines starting with a double "##" explain how to modify that line to 
+# include more variables.
+
+# assign custom colours
+## colours <- c("#COLORCODE1", "#COLORCODE2", "#COLORCODE3", "#COLORCODE4")
 colours <- c("#eca615", "#7accc8")
 
 # load data manually
+## add to the vector for each place/town:  Watsontown = c(var1, var2, var3, var4)
 alertdf.test <- data.frame(variable = c("Effectiveness", "Legitimacy"), 
                         #COPY PLACENAME FROM HERE
                            Watsontown = c(3.89,3.32),
@@ -36,14 +42,14 @@ alertdf.test <- data.frame(variable = c("Effectiveness", "Legitimacy"),
                            Albuquerque = c(2.43,1.45),
                            Rochester = c(3.23,0.5),
                            PicoRivera = c(1.85,1.81)
-                           
 )
 
 # plot data on coxcomb chart
 plot<- ggplot(alertdf.test, aes(factor(variable), 
                               # PASTE PLACENAME HERE
                                 Northampton, fill = factor(variable))) + 
-  
+                                
+
   geom_bar(width = 1, stat = "identity") + 
   scale_y_continuous(limits=c(0,4), breaks=c(1,2,3,4)) + coord_polar() + 
   scale_fill_manual(values=colours) +
